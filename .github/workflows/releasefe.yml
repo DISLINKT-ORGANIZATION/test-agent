@@ -1,4 +1,4 @@
-name: Release
+name: Releasefe
 
 on:
   push:
@@ -50,14 +50,10 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-            cd agent-fe
-            npm install
+        run: npm install
 
       - name: Build
-        run: |
-            cd agent-fe
-            npm run build
+        run: npm run build
 
       - name: Set Up QEMU
         uses: docker/setup-qemu-action@v2
