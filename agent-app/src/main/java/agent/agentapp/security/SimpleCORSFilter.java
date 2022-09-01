@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,9 @@ import org.springframework.stereotype.Component;
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class SimpleCORSFilter implements Filter {
+	
+	@Value("${cors.origin}")
+    private String corsOrigin;
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
@@ -29,7 +33,7 @@ public class SimpleCORSFilter implements Filter {
         System.out.println(request.getHeader("Origin"));
 
         // dodati gateway, dislinkt i agentsku
-        String[] origins = {"http://localhost:5030"};
+        String[] origins = {corsOrigin};
         for (String s : origins) {
             if (request.getHeader("Origin") != null) {
                 if (s.equals(request.getHeader("Origin"))) {
