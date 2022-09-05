@@ -71,7 +71,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Remove node modules
-        run: git rm -r --cached node_modules
+        run: git rm -r --cached agent-fe/node_modules
 
       - name: Install dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
